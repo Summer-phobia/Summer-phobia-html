@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <!-- 온라인 연결 -->
+ 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- 부트스트랩에서 필요로 하는 기타 js 파일들 -->
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <style>
+        body {
+            background-image: url("https://images.unsplash.com/photo-1632109243117-2432e8485c63?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .boxes .window {
+            position: absolute;
+            display: none;
+            z-index: 9999;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .boxes #dialog {
+            width: 1050px;
+            height: 550px;
+            padding: 10px;
+            background-color: white;
+            font-family: 'Segoe UI Light', sans-serif;
+            font-size: 15pt;
+            text-align: left;
+            background-image: url("https://images.unsplash.com/photo-1618504055346-03094740c7a5?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;                  
+        }
+
+        #container_box{
+            font-size: 0.75em;
+            font-family: 'Noto Sans KR', sans-serif;
+            box-sizing: border-box;
+            width: 100%;
+            margin: 0 auto;
+            height: auto;
+            height: 100%;
+            zoom: 1;
+        }
+        #content{
+           /* 관련 폰트 수정하려면 여기에 */
+            width: 100%;
+            height: 100%;
+            display: block;
+            opacity: 0.1;
+          
+        }
+        #content_1,#content_2{
+           display: table-cell;
+           
+        }
+        #content:hover {
+            opacity: 1;
+        }
+
+        
+        .group1{
+           width: 90%;
+           margin-top: 40px;
+           margin-right: 320px;
+        }
+        
+        
+        /*해골그림 안가리게 하는 마진 레프트 */          
+        
+        .group2{
+            width: 60%;
+            margin-top: 40px;         
+        }
+        
+        
+        
+        #memberjoin{
+            margin-top: 20%;
+            text-align: center;
+        }
+       
+        .form-group {
+            position: relative; /* 부모 요소를 relative로 설정 */
+            width: 100%;
+        }
+
+        .form-control{
+            width: 355px;
+        }
+        input:hover{
+            cursor: pointer;
+        }
+
+        .invalid-feedback, .valid-feedback {
+            position: absolute; /* 절대 위치 지정 */
+            left: 10px; /* input 필드 왼쪽 정렬 */
+            bottom: -20px; /* 입력창 아래에 배치 */
+            font-size: 12px; /* 글자 크기 줄이기 */
+            white-space: nowrap; /* 줄바꿈 방지 */
+            display: none;
+        }
+        .is-valid {
+            border-color: #28a745 !important; /* 초록색 테두리 */
+            box-shadow: 0 0 5px rgba(40, 167, 69, 0.7) !important; /* 초록색 테두리 효과 */
+        }
+        .is-invalid {
+            border-color: #dc3545 !important; /* 빨간색 테두리 */
+            background-image: none !important; /* 불필요한 Bootstrap 아이콘 제거 */
+            box-shadow: 0 0 5px rgba(220, 53, 69, 0.7) !important; /* 빨간색 테두리 효과 */ 
+        }
+        #userId {
+            width: 260px;
+        }
+        #nickname {
+            width: 260px;
+        }
+
+        .checkbox {
+            display: inline-block;
+            width: 90px;
+            font-size: 15px;
+            margin: 0px;
+            margin-bottom: 5px;
+        }
+            
+    
+    </style>
+</head>
+<body>
+
+    <div id="boxes" class="boxes">
+        <div id="dialog" class="window">
+            <div id="container_box">
+                <div id="content">
+                    
+                    <form action="main.html" method="post"  class="was-validated" novalidate>
+                    <div id="content_1">
+
+                            <div class="form-group group1">
+                                * 아이디 :
+                                <br> 
+                                <input type="text" name="userId" id="userId" placeholder="아이디를 입력하세요." class="form-control" style="display: inline-block;"required>
+                                <div class="valid-feedback">확인.</div>
+                                <div class="invalid-feedback">영문자 또는 숫자로만 5~12자 사이로 입력하세요.</div>
+                                <button type="button" class="btn btn-secondary group1 checkbox" style="display: inline-block;">중복확인</button>
+                            </div>
+                            
+                            <div class="form-group group1">                               
+                                * 닉네임 : 
+                                <br>
+                                <input type="text" name="nickname" id="nickname" placeholder="닉네임을 입력하세요" class="form-control" style="display: inline-block;" required>
+                                <div class="valid-feedback">확인.</div>
+                                <div class="invalid-feedback">닉네임을 입력하세요.</div>
+                                <button type="button" class="btn btn-secondary group1 checkbox" style="display: inline-block;">중복확인</button>
+                            </div>  
+                            
+                            <div class="form-group group1">
+                                * 비밀번호 : <input type="password" name="userPwd" id="userPwd" placeholder="비밀번호를 입력하세요." class="form-control" required>
+                                <div class="valid-feedback">확인.</div>
+                                <div class="invalid-feedback" id="check_pwd">영문자, 숫자, 특수기호를 포함해서 6~15자 사이로 입력하세요.</div>
+                            </div>
+                            
+                            <div class="form-group group1">
+                                
+                                * 비밀번호 확인: <input type="password" name="checkPwd" id="checkPwd" placeholder="비밀번호를 입력하세요." class="form-control" required>
+                                <div class="valid-feedback">확인.</div>
+                                <div class="invalid-feedback">위의 비밀번호와 동일하게 입력하세요</div>
+                            </div>
+
+                                                   
+                        
+                    </div> 
+                    <!-- content_1 영역 끝 -->
+                    <div id="content_2">
+                      
+                            
+                            <div class="form-group group2">
+                                * 이메일
+                                : <input type="email" name="email" id="email" placeholder="이메일을 입력하세요." class="form-control" required>
+                                <div class="valid-feedback">확인.</div>
+                                <div class="invalid-feedback">이메일 형식에 맞춰서 입력하세요.</div>
+                            </div>
+                            <!-- 자동으로 이메일 주소 형식인지 검사해줌!! -->
+
+                            <div class="form-group group2">
+                        
+                                좋아하는 공포
+                                : <input type="text" name="hobby" id="hobby" list="hobbyList" class="form-control" required
+                                placeholder="공포의 장르를 고르거나 입력"> <br>
+                                <datalist id="hobbyList">
+                                    <option>액션 호러</option>
+                                    <option>코미디 호러</option>
+                                    <option>재앙 호러</option>
+                                    <option>초자연적 호러</option>
+                                    <option>좀비 호러</option>
+                                </datalist>
+                            </div>
+                            
+                            <div class="form-group group2">                           
+                                생년월일
+                                : <input type="date" name="birthdate" id="birthdate" required>
+                                <div class="valid-feedback">확인.</div>
+                                <div class="invalid-feedback">생년월일을 입력하세요.</div>
+                            </div>
+
+                            <div class="form-group group2">                        
+                                성별 : 
+                                <input type="radio" name="gender" id="female"><label for="female">여자</label>
+                                <input type="radio" name="gender" id="male" ><label for="male">남자</label>
+                                <input type="radio" name="gender" id="nogender" checked><label for="nogender">선택안함</label>
+                        
+                            </div>
+
+                            <div class="form-group group2">
+                                프로필 사진 : <br>
+                                    <input id="file" type="file" multiple="">
+                                </label>
+                            </div>
+
+                            <div class="form-group group2">
+                                <div id="memberjoin" style="margin: auto; margin-left: 40%;">
+                                    <input type="submit" value="회원가입" class="btn btn-primary" onclick="return validate();">
+                                    <a href="main.html" value="취소" class="btn btn-outline-secondary">취소</a>
+                                </div>                               
+                            </div>
+                        </div>
+                        <!-- content2 영역 끝 -->                                   
+                    </form>      
+                </div>                               
+            </div>                  
+        </div>             
+    </div>
+
+    <div id="mask">
+                
+    </div>
+
+
+    <script>
+        // 회원가입 메소드
+        function validate(){
+
+            let userId = document.getElementById("userId").value; 
+            let userPwd = document.getElementById("userPwd").value; 
+            let checkPwd = document.getElementById("checkPwd").value; 
+            let userName = document.getElementById("nickname").value;
+            let email = document.getElementById("email").value;
+        
+            if(userPwd != checkPwd){
+            
+                alert("위 비밀번호와 일치하지 않습니다.")
+                return false;
+            }
+    
+            let regExp = /^[a-zA-Z0-9]{5,12}$/;
+        
+            if(!regExp.test(userId)){
+                // 패턴에 만족하지 않은 아이디라면
+                alert("유효한 아이디가 아닙니다.");
+                // 아이디 재입력 유도
+                document.getElementById("userId").select();
+                return false;
+            }
+
+            let regExp1 = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*])[a-zA-Z][a-zA-Z0-9~!@#$%^&*]{9,14}$/;
+
+            if(!regExp1.test(userPwd)){
+                alert("유효한 비밀번호가 아닙니다.")
+
+                document.getElementById("userPwd").select();
+            
+                return false;
+            }
+
+            let regExp3 = /^[a-zA-Z0-9가-힣]{2,10}$/;
+
+            if (!regExp3.test(userName)) {
+                alert("닉네임을 정확히 입력해 주세요");
+
+                document.getElementById("nickname").select();
+                return false;
+            }
+
+            if($("#email").val()=="") {
+                alert("이메일을 입력해야 합니다.");
+                return false;
+            }
+          
+            if($("#birthdate").val()=="") {
+                alert("생년월일을 입력해야 합니다.");
+                return false;
+            }
+            
+
+            return true;
+        }
+
+        /* 입력창 조건과 일치하는지 검사하기 위한 메소드 */
+        document.addEventListener("DOMContentLoaded", function () {
+            // 아이디와 비밀번호 입력 필드
+            let userIdInput = document.getElementById("userId");
+            let userPwdInput = document.getElementById("userPwd");
+
+            // 비밀번호 확인 입력 필드
+            let checkPwdInput = document.getElementById("checkPwd");
+
+            // 닉네임 입력 필드
+            let nickNameInput = document.getElementById("nickname");
+
+            // 정규식 패턴
+            let regExpId = /^[a-zA-Z0-9]{5,12}$/;  // 아이디: 영문자 또는 숫자로 5~12자
+            let regExpPwd = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*])[a-zA-Z0-9~!@#$%^&*]{5,14}$/; // 비밀번호: 첫 글자는 영문자, 10~15자
+            let regExpName = /^[a-zA-Z0-9가-힣]{2,10}$/;
+
+            // 아이디 검사 함수
+            function idInput(inputElement, regExp) {
+                let value = inputElement.value.trim();
+                let formGroup = inputElement.closest(".form-group");
+                let validFeedback = formGroup.querySelector(".valid-feedback");
+                let invalidFeedback = formGroup.querySelector(".invalid-feedback");
+
+                let errorMessage = "";
+                let regExp1 = /^[a-zA-Z0-9]+$/; // 문자+숫자
+                let regExp2 = /^[0-9]+$/; // 숫자만
+                
+                if (value === "") {
+                    errorMessage = "영문자 또는 숫자로만 5~12자 사이로 입력하세요.";
+                } else if (!regExp1.test(value)) {
+                    errorMessage = "영문자와 숫자만 사용할 수 있습니다.";
+                } else if (value.length < 5) {
+                    errorMessage = "아이디가 너무 짧습니다.";
+                } else if (value.length > 12) {
+                    errorMessage = "아이디가 너무 깁니다.";
+                } else if (regExp2.test(value)) {
+                    errorMessage = "숫자만 사용할 수 없습니다. 영문자를 포함해야 합니다.";
+                } else {
+                    errorMessage = "확인";
+                }
+               
+                if (regExp.test(value)) {
+                    inputElement.classList.remove("is-invalid");
+                    inputElement.classList.add("is-valid");
+                    validFeedback.style.display = "block";
+                    invalidFeedback.style.display = "none";
+                    validFeedback.textContent = errorMessage;
+                } else {
+                    inputElement.classList.remove("is-valid");
+                    inputElement.classList.add("is-invalid");
+                    validFeedback.style.display = "none";
+                    invalidFeedback.style.display = "block";
+                    invalidFeedback.textContent = errorMessage;
+                }
+            }
+
+            // 비밀번호 검사 함수
+            function passwordInput(inputElement, regExp) {
+                let value = inputElement.value.trim();
+                let formGroup = inputElement.closest(".form-group");
+                let validFeedback = formGroup.querySelector(".valid-feedback");
+                let invalidFeedback = formGroup.querySelector(".invalid-feedback");
+
+                let errorMessage = "";
+
+                if(value.length>0) {
+                    if(value.length<6) {
+                        errorMessage = "비밀번호가 너무 짧습니다.";
+                    } else if(value.length>15) {
+                        errorMessage = "비밀번호가 너무 깁니다.";
+                    } else {
+                        if (regExp.test(value)) {
+                            errorMessage = "확인";
+                        } else {
+                            errorMessage = "잘못된 형식입니다.";
+                        }
+                    }
+                } else {
+                    errorMessage = "영문자, 숫자, 특수기호를 포함해서 6~15자 사이로 입력하세요.";
+                }
+                
+                if (regExp.test(value)) {
+                    inputElement.classList.remove("is-invalid");
+                    inputElement.classList.add("is-valid");
+                    validFeedback.style.display = "block";
+                    invalidFeedback.style.display = "none";
+                    validFeedback.textContent = errorMessage;
+                } else {
+                    inputElement.classList.remove("is-valid");
+                    inputElement.classList.add("is-invalid");
+                    validFeedback.style.display = "none";
+                    invalidFeedback.style.display = "block";
+                    invalidFeedback.textContent = errorMessage;
+                }
+            }
+
+            // 비밀번호 확인 검사 함수
+            function passwordCheck(userPwdInput, checkPwdInput) {
+                let inputElement = checkPwdInput;
+                let formGroup = inputElement.closest(".form-group");
+                let validFeedback = formGroup.querySelector(".valid-feedback");
+                let invalidFeedback = formGroup.querySelector(".invalid-feedback");
+
+                let userPwdValue = userPwdInput.value.trim();
+                let checkPwdValue = checkPwdInput.value.trim();
+
+                if (userPwdValue == "" || checkPwdValue == "") {
+                    inputElement.classList.remove("is-valid");
+                    inputElement.classList.add("is-invalid");
+                    validFeedback.style.display = "none";
+                    invalidFeedback.style.display = "block";
+                    return;
+                }
+
+                if (userPwdValue == checkPwdValue) {
+                    inputElement.classList.remove("is-invalid");
+                    inputElement.classList.add("is-valid");
+                    validFeedback.textContent = "비밀번호가 일치합니다.";
+                    validFeedback.style.display = "block";
+                    invalidFeedback.style.display = "none";
+                } else {
+                    inputElement.classList.remove("is-valid");
+                    inputElement.classList.add("is-invalid");
+                    invalidFeedback.textContent = "비밀번호가 일치하지 않습니다.";
+                    validFeedback.style.display = "none";
+                    invalidFeedback.style.display = "block";
+                }
+                             
+            }
+
+            // 닉네임 검사 함수
+            function nameCheck(inputElement, regExp) {
+                let value = inputElement.value.trim();
+                let formGroup = inputElement.closest(".form-group");
+                let validFeedback = formGroup.querySelector(".valid-feedback");
+                let invalidFeedback = formGroup.querySelector(".invalid-feedback");
+
+                let errorMessage = "";
+                let regExp1 = /^[a-zA-Z0-9가-힣]+$/;
+
+                if (value.length === 0) {
+                    errorMessage = "2~10글자의 닉네임을 입력하세요.";
+                } else if (!regExp.test(value)) {
+                    errorMessage = "잘못된 형식입니다.";
+                } else if (value.length < 2) {
+                    errorMessage = "닉네임이 너무 짧습니다.";
+                } else if (value.length > 10) {
+                    errorMessage = "닉네임이 너무 깁니다.";
+                } else {
+                    errorMessage = "확인";
+                }
+                
+                if (regExp.test(value)) {
+                    inputElement.classList.remove("is-invalid");
+                    inputElement.classList.add("is-valid");
+                    validFeedback.style.display = "block";
+                    invalidFeedback.style.display = "none";
+                    validFeedback.textContent = errorMessage;
+                } else {
+                    inputElement.classList.remove("is-valid");
+                    inputElement.classList.add("is-invalid");
+                    validFeedback.style.display = "none";
+                    invalidFeedback.style.display = "block";
+                    invalidFeedback.textContent = errorMessage;
+                }
+            }
+
+            // 아이디 입력 필드 유효성 검사
+            userIdInput.addEventListener("input", function () {
+                idInput(userIdInput, regExpId);
+            });
+
+            // 비밀번호 입력 필드 유효성 검사
+            userPwdInput.addEventListener("input", function () {
+                passwordCheck(userPwdInput, checkPwdInput);
+                passwordInput(userPwdInput, regExpPwd);
+            });
+
+            // 비밀번호 확인 입력 필드 유효성 검사
+            checkPwdInput.addEventListener("input", function() {
+                passwordCheck(userPwdInput, checkPwdInput)
+            });
+
+            // 닉네임 입력 필드 유효성 검사
+            nickNameInput.addEventListener("input", function() {
+                nameCheck(nickNameInput, regExpName);
+            });          
+            
+            let birthInput = document.getElementById("birthdate");
+            let birthMessage = document.getElementById("birth");
+
+            /* 성인 검사 함수 */ /* 옆에 텍스트 버전 */
+            /*
+            birthInput.addEventListener("change", function () {
+                if (birthInput.value) {
+                    let birthDate = new Date(birthInput.value);
+                    let today = new Date();
+
+                    let age = today.getFullYear() - birthDate.getFullYear();
+
+                    // 생일이 안 지났으면 한 살 빼기
+                    const thisYearBirthday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+                    if (today < thisYearBirthday) {
+                        age--;
+                    }
+
+                    if (age >= 19) {
+                        birthMessage.innerText = "성인";
+                        birthMessage.style.color = "#008080";
+                    } else {
+                        birthMessage.innerText = "미성년자";
+                        birthMessage.style.color = "#008080";
+                    }
+
+                    // 피드백 표시
+                    birthInput.classList.remove("is-invalid");
+                    birthInput.classList.add("is-valid");
+                } else {
+                    birthInput.classList.remove("is-valid");
+                    birthInput.classList.add("is-invalid");
+                    birthMessage.innerText = "";
+                }
+            });
+
+            /* 성인 검사 함수 */ /* 밑에 텍스트 버전 */
+            birthInput.addEventListener("change", function () {
+                let birthDate = new Date(birthInput.value);
+                let today = new Date();
+                
+                let inputElement = birthInput;
+                let formGroup = inputElement.closest(".form-group");
+                let validFeedback = formGroup.querySelector(".valid-feedback");
+                let invalidFeedback = formGroup.querySelector(".invalid-feedback");
+
+                let age = today.getFullYear() - birthDate.getFullYear();
+
+                // 생일이 안 지났으면 한 살 빼기
+                const thisYearBirthday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+                if (today < thisYearBirthday) {
+                    age--;
+                }
+
+                if (age >= 19) {
+                    inputElement.classList.remove("is-invalid");
+                    inputElement.classList.add("is-valid");
+                    validFeedback.style.display = "block";
+                    invalidFeedback.style.display = "none";
+                    validFeedback.textContent = "성인입니다";
+                    validFeedback.style.color = "black";
+                } else {
+                    inputElement.classList.remove("is-valid");
+                    inputElement.classList.add("is-invalid");
+                    validFeedback.style.display = "none";
+                    invalidFeedback.style.display = "block";
+                    invalidFeedback.textContent = "미성년자입니다";
+                    invalidFeedback.style.color = "black";
+                }            
+            });
+
+        });
+    
+    </script>
+
+
+<script>
+
+    // 창모드 용
+    $(document).ready(function() {
+        function resizeModal() {
+            var maskHeight = $(window).height();
+            var maskWidth = $(window).width();
+            
+            // `mask` 크기 조정
+            $('#mask').css({'width': maskWidth, 'height': maskHeight});
+
+            var winH = $(window).height();
+            var winW = $(window).width();
+
+            // `dialog` 중앙 배치
+            $('#dialog').css({
+                'top': winH / 2 - $('#dialog').height() / 2,
+                'left': winW / 2 - $('#dialog').width() / 2
+            });
+        }
+
+        // 초기 로딩 시 크기 조정
+        resizeModal();
+
+        // 창 크기 변경될 때 크기 다시 조정
+        $(window).resize(function() {
+            resizeModal();
+        });
+    });
+
+        
+    $(document).ready(function() {	
+
+        var id = '#dialog';
+        
+        //창 전체 크기 설정
+        var maskHeight = $(document).height();
+        var maskWidth = $(window).width();
+            
+        //창 CSS 전체 크기 설정
+        $('#mask').css({'width':maskWidth,'height':maskHeight});
+
+        //전체 화면 드러내는 효과 // 0.5초
+        $('#mask').fadeIn(500);	
+           
+        //팝업의 크기.
+        var winH = $(window).height();
+        var winW = $(window).width();
+                    
+        //가운데에 오도록 설정.
+        $(id).css('top',  winH/2-$(id).height()/2);
+        $(id).css('left', winW/2-$(id).width()/2);
+            
+        //모달창 드러내는 효과 // 2초
+        $(id).fadeIn(3000); 	
+              
+    });
+
+  </script>
+
+
+    
+</body>
+</html>

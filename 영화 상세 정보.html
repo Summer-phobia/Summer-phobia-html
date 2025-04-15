@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>The Movie Database (TMDB)</title>
+        <script src="resources/js/jquery-3.7.1.min.js"></script>
+    </head>
+    <style>
+        /* 화면 구조 잡기 영역 시작 */
+        div {
+            /* border 속성으로 가이드라인 잡기 */
+            border: 1px solid red;
+            box-sizing : border-box;
+            background-color: black;
+        }
+
+        /* content 영역 전체 */
+        #content {
+            width : 1400px;
+            height : 510px;
+            position: relative;
+            color : white;
+        }
+
+        #content_use {
+            width : 1322px;     /* border 때문에 임시로 2px 추가 */
+            height : 452px;
+            position : absolute;
+            left : 40px;
+            top : 30px;
+        }
+
+        #content_use>div {
+            height: 100%;
+            float : left;       /* 블럭 요소인 div들을 옆으로 배치되도록 함 */
+        }
+
+        #poster {
+            width : 300px;
+        }
+
+        #info {
+            width : 980px;
+            margin-left : 40px;
+        }
+
+        #info>h2 {
+            margin-top : 0px;
+            margin-bottom : 0px;
+        }
+
+        .title {
+            font-size: 25px;
+            height : 33px;
+        }
+
+        .fact {
+            font-size: 18px;
+            height : 24px;
+        }
+
+        .certification {
+            border : 1px solid rgba(255,255,255,0.5);
+            color : red;
+        }
+
+        li {
+            margin-right : 20px;
+            list-style : none;
+            float : left;
+        }
+
+        li>p{
+            line-height : 5px;
+        }
+        
+    </style>
+    <body>
+        <div id="content">
+            <div id="content_use">
+                <div id="poster">
+                    <img src="resources/image/텍사스.jpg"
+                        alt="텍사스"
+                        width="300px"
+                        height="450px">
+                </div>
+
+                <div id="info">
+                    <h2 class="title">
+                        <span>텍사스 전기톱 학살 (1974)</span>
+                    </h2>
+                    <h2 class="fact">
+                        <span class="certification">19</span>
+                        <span class="release">1974/10/11 (US)</span>
+                        ·
+                        <span class="genres">슬래셔, 포크 호러, 고어</span>
+                        ·
+                        <span class="runtime">1h 24m</span>
+                    </h2>
+                    <h3>시놉시스</h3>
+                    <div>
+                        <p>
+                            누가 살아남을 것이고 그들에게 무엇이 남을 것인가?<br>
+                            미국에서 가장 기괴하고 잔혹한 범죄...!
+                        </p>
+                    </div>
+                    <li>
+                        <h3>감독</h3>
+                        <p>토브 후퍼</p>
+                    </li>
+                    <li>
+                        <h3>각본</h3>
+                        <p>킴 헨켈</p>
+                        <p>토브 후퍼</p>
+                    </li>
+                    <li>
+                        <h3>출연</h3>
+                        <p>마릴린 번즈</p>
+                        <p>폴 A. 파테인</p>
+                        <p>알렌 댄지거</p>
+                        <p>윌리엄 베일</p>
+                        <p>테리 맥민</p>
+                        <p>군나르 한센</p>
+                    </li>
+                    <li>
+                        <h3>제작사</h3>
+                        <p>볼텍스</p>
+                    </li>
+                    <li>
+                        <h3>배급사</h3>
+                        <p>브라이언스톤 디스트리뷰팅 컴퍼니</p>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
